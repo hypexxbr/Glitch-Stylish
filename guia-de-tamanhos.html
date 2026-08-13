@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Tamanhos — Glitch Stylish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400&family=Inter:wght@300;400;500;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0a0a0a;
+    --near-black:#141414;
+    --white:#fafafa;
+    --grey-mid:#8c8c8c;
+    --grey-light:#d4d4d4;
+    --hairline:rgba(250,250,250,0.14);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--black);
+    color:var(--white);
+    font-family:'Inter',sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+    padding-top:42px;
+  }
+
+  ::selection{background:var(--white);color:var(--black);}
+
+  /* ============ AVISO ACADÊMICO ============ */
+  .notice-bar{
+    position:fixed;
+    top:0;left:0;right:0;
+    height:42px;
+    z-index:150;
+    background:var(--white);
+    color:var(--black);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    padding:0 20px;
+    font-family:'Inter',sans-serif;
+    font-size:12px;
+    text-align:center;
+  }
+  .notice-bar a{
+    color:var(--black);
+    text-decoration:underline;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .notice-bar button{
+    background:none;border:none;color:var(--black);
+    font-size:18px;line-height:1;cursor:pointer;
+    padding:0 2px;flex-shrink:0;
+  }
+  html.notice-dismissed .notice-bar{display:none;}
+  html.notice-dismissed header{top:0;}
+  html.notice-dismissed body{padding-top:0;}
+  @media (max-width:860px){
+    .notice-bar{height:auto;min-height:42px;padding:8px 16px;font-size:11px;flex-wrap:wrap;}
+  }
+
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;
+    top:42px;left:0;right:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:28px 48px;
+    mix-blend-mode:difference;
+  }
+
+  .logo{
+    font-family:'Bodoni Moda',serif;
+    font-size:20px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--white);
+  }
+
+  nav ul{display:flex;gap:40px;list-style:none;}
+
+  nav a{
+    color:var(--white);
+    text-decoration:none;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    position:relative;
+    padding-bottom:4px;
+  }
+
+  nav a::after{
+    content:'';
+    position:absolute;
+    left:0;bottom:0;
+    width:0;height:1px;
+    background:var(--white);
+    transition:width .4s cubic-bezier(.65,0,.35,1);
+  }
+
+  nav a:hover::after{width:100%;}
+
+  .cart{
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    border:1px solid var(--white);
+    padding:8px 16px;
+    background:transparent;
+    color:var(--white);
+    cursor:pointer;
+    transition:background .3s, color .3s;
+  }
+
+  .cart:hover{background:var(--white);color:var(--black);}
+
+  /* ---------- PAGE HEAD ---------- */
+  .page-head{
+    padding:180px 48px 64px;
+    border-bottom:1px solid var(--hairline);
+  }
+
+  .page-head .eyebrow{
+    display:block;
+    font-size:11px;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--grey-mid);
+    margin-bottom:24px;
+  }
+
+  .page-head h1{
+    font-family:'Bodoni Moda',serif;
+    font-weight:400;
+    font-size:clamp(40px,6vw,72px);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    max-width:760px;
+  }
+
+  .page-head h1 em{font-style:italic;}
+
+  .back-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:36px;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--grey-mid);
+    text-decoration:none;
+  }
+
+  .back-link:hover{color:var(--white);}
+  .back-link span{width:20px;height:1px;background:var(--grey-mid);transition:background .3s;}
+  .back-link:hover span{background:var(--white);}
+
+  /* ---------- PROSE ---------- */
+  .prose-wrap{
+    padding:80px 48px 60px;
+    display:flex;
+    justify-content:center;
+  }
+
+  .prose{
+    max-width:680px;
+    width:100%;
+  }
+
+  .lead{
+    font-family:'Bodoni Moda',serif;
+    font-style:italic;
+    font-size:clamp(20px,2.4vw,26px);
+    line-height:1.6;
+    color:var(--white);
+    margin-bottom:56px;
+  }
+
+  .prose-section{
+    margin-top:56px;
+    padding-top:40px;
+    border-top:1px solid var(--hairline);
+  }
+
+  .prose-section:first-of-type{margin-top:0;padding-top:0;border-top:none;}
+
+  .prose-section .sec-num{
+    display:block;
+    font-size:11px;
+    letter-spacing:0.2em;
+    color:var(--grey-mid);
+    margin-bottom:14px;
+  }
+
+  .prose-section h2{
+    font-family:'Bodoni Moda',serif;
+    font-weight:400;
+    font-size:24px;
+    margin-bottom:16px;
+  }
+
+  .prose-section p{
+    font-size:14px;
+    line-height:1.85;
+    color:var(--grey-light);
+    margin-bottom:14px;
+  }
+
+  .values-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+    margin-top:8px;
+  }
+
+  .value-item h3{
+    font-family:'Bodoni Moda',serif;
+    font-weight:400;
+    font-size:17px;
+    margin-bottom:8px;
+  }
+
+  .value-item p{
+    font-size:13px;
+    line-height:1.7;
+    color:var(--grey-light);
+  }
+
+  .size-tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:32px;
+    flex-wrap:wrap;
+  }
+
+  .size-tab{
+    font-family:'Inter',sans-serif;
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--grey-mid);
+    background:transparent;
+    border:1px solid var(--hairline);
+    padding:10px 18px;
+    cursor:pointer;
+    transition:border-color .3s, color .3s;
+  }
+
+  .size-tab:hover{color:var(--white);border-color:var(--grey-mid);}
+
+  .size-tab.active{color:var(--white);border-color:var(--white);}
+
+  .size-panel{display:none;}
+  .size-panel.active{display:block;}
+
+  .size-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom:32px;
+  }
+
+  .size-table caption{
+    text-align:left;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--grey-mid);
+    margin-bottom:12px;
+  }
+
+  .size-table th,
+  .size-table td{
+    text-align:left;
+    font-size:13px;
+    padding:12px 14px;
+    border-bottom:1px solid var(--hairline);
+    color:var(--grey-light);
+  }
+
+  .size-table th{
+    color:var(--white);
+    font-weight:400;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    font-size:11px;
+  }
+
+  .size-table td:first-child,
+  .size-table th:first-child{color:var(--white);}
+
+  .measure-tip{
+    display:flex;
+    gap:20px;
+    padding:20px 0;
+    border-top:1px solid var(--hairline);
+  }
+
+  .measure-tip:last-child{border-bottom:1px solid var(--hairline);}
+
+  .measure-tip .m-num{
+    font-family:'Bodoni Moda',serif;
+    font-style:italic;
+    font-size:20px;
+    color:var(--grey-mid);
+    width:32px;
+    flex-shrink:0;
+  }
+
+  .measure-tip h3{
+    font-family:'Bodoni Moda',serif;
+    font-weight:400;
+    font-size:15px;
+    margin-bottom:6px;
+  }
+
+  .measure-tip p{
+    font-size:13px;
+    line-height:1.7;
+    color:var(--grey-light);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--hairline);
+    padding:40px 48px;
+    display:flex;
+    justify-content:space-between;
+    font-size:11px;
+    color:var(--grey-mid);
+    letter-spacing:0.05em;
+  }
+
+  footer a{color:var(--grey-mid);text-decoration:none;}
+  footer a:hover{color:var(--white);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    header{padding:20px 24px;}
+    nav ul{display:none;}
+    .page-head{padding:140px 24px 48px;}
+    .prose-wrap{padding:56px 24px 40px;}
+    .values-grid{grid-template-columns:1fr;gap:24px;}
+    footer{flex-direction:column;gap:8px;padding:32px 24px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;}
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline:1px solid var(--white);
+    outline-offset:4px;
+  }
+</style>
+</head>
+<body>
+  <div class="notice-bar" id="noticeBar">
+    <span>Este site é um projeto acadêmico (atividade de faculdade) — não é uma loja real, nenhuma venda é feita aqui. <a href="sobre.html">Saiba mais</a></span>
+    <button id="noticeClose" aria-label="Fechar aviso">&times;</button>
+  </div>
+
+
+<header>
+  <a class="logo" href="index.html">Glitch Stylish</a>
+  <nav>
+    <ul>
+      <li><a href="rick-owens.html">Rick Owens</a></li>
+      <li><a href="chrome-hearts.html">Chrome Hearts</a></li>
+      <li><a href="mihara-yasuhiro.html">Mihara Yasuhiro</a></li>
+      <li><a href="contato.html">Contato</a></li>
+    </ul>
+  </nav>
+  <button class="cart">Sacola (0)</button>
+</header>
+
+<section class="page-head">
+  <span class="eyebrow">Atendimento</span>
+  <h1>Guia de <em>tamanhos</em></h1>
+  <a class="back-link" href="index.html"><span></span>Voltar para a loja</a>
+</section>
+
+<section class="prose-wrap">
+  <div class="prose">
+    <p class="lead">Cada marca tem sua própria modelagem. Consulte a tabela correspondente antes de escolher o tamanho — e, na dúvida entre dois números, prefira o maior.</p>
+
+    <div class="prose-section">
+      <span class="sec-num">01</span>
+      <h2>Tabela por marca</h2>
+
+      <div class="size-tabs" role="tablist" aria-label="Selecionar marca">
+        <button class="size-tab active" data-target="panel-rick" role="tab" aria-selected="true">Rick Owens</button>
+        <button class="size-tab" data-target="panel-chrome" role="tab" aria-selected="false">Chrome Hearts</button>
+        <button class="size-tab" data-target="panel-mihara" role="tab" aria-selected="false">Mihara Yasuhiro</button>
+      </div>
+
+      <div class="size-panel active" id="panel-rick">
+        <table class="size-table">
+          <caption>Rick Owens — medidas em cm</caption>
+          <thead>
+            <tr><th>Tamanho</th><th>Peito</th><th>Cintura</th><th>Quadril</th><th>Comprimento manga</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>XS</td><td>86–90</td><td>70–74</td><td>88–92</td><td>62</td></tr>
+            <tr><td>S</td><td>91–95</td><td>75–79</td><td>93–97</td><td>63</td></tr>
+            <tr><td>M</td><td>96–100</td><td>80–84</td><td>98–102</td><td>64</td></tr>
+            <tr><td>L</td><td>101–106</td><td>85–90</td><td>103–108</td><td>65</td></tr>
+            <tr><td>XL</td><td>107–112</td><td>91–96</td><td>109–114</td><td>66</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="size-panel" id="panel-chrome">
+        <table class="size-table">
+          <caption>Chrome Hearts — medidas em cm</caption>
+          <thead>
+            <tr><th>Tamanho</th><th>Peito</th><th>Cintura</th><th>Quadril</th><th>Comprimento manga</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>S</td><td>92–96</td><td>76–80</td><td>94–98</td><td>63</td></tr>
+            <tr><td>M</td><td>97–102</td><td>81–86</td><td>99–104</td><td>64</td></tr>
+            <tr><td>L</td><td>103–108</td><td>87–92</td><td>105–110</td><td>65</td></tr>
+            <tr><td>XL</td><td>109–114</td><td>93–98</td><td>111–116</td><td>66</td></tr>
+            <tr><td>XXL</td><td>115–120</td><td>99–104</td><td>117–122</td><td>67</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="size-panel" id="panel-mihara">
+        <table class="size-table">
+          <caption>Maison Mihara Yasuhiro — medidas em cm</caption>
+          <thead>
+            <tr><th>Tamanho</th><th>Peito</th><th>Cintura</th><th>Quadril</th><th>Comprimento manga</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1 (P)</td><td>88–92</td><td>72–76</td><td>90–94</td><td>61</td></tr>
+            <tr><td>2 (M)</td><td>93–98</td><td>77–82</td><td>95–100</td><td>62</td></tr>
+            <tr><td>3 (G)</td><td>99–104</td><td>83–88</td><td>101–106</td><td>63</td></tr>
+            <tr><td>4 (GG)</td><td>105–110</td><td>89–94</td><td>107–112</td><td>64</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="prose-section">
+      <span class="sec-num">02</span>
+      <h2>Como se medir</h2>
+
+      <div class="measure-tip">
+        <span class="m-num">01</span>
+        <div>
+          <h3>Peito</h3>
+          <p>Passe a fita ao redor da parte mais larga do peito, mantendo-a paralela ao chão, sem apertar.</p>
+        </div>
+      </div>
+      <div class="measure-tip">
+        <span class="m-num">02</span>
+        <div>
+          <h3>Cintura</h3>
+          <p>Meça na parte mais estreita do tronco, geralmente logo acima do umbigo.</p>
+        </div>
+      </div>
+      <div class="measure-tip">
+        <span class="m-num">03</span>
+        <div>
+          <h3>Quadril</h3>
+          <p>Envolva a fita na parte mais larga do quadril, mantendo-a nivelada.</p>
+        </div>
+      </div>
+      <div class="measure-tip">
+        <span class="m-num">04</span>
+        <div>
+          <h3>Comprimento da manga</h3>
+          <p>Com o braço levemente flexionado, meça do topo do ombro até o punho.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prose-section">
+      <span class="sec-num">03</span>
+      <h2>Entre dois tamanhos?</h2>
+      <p>As três marcas trabalham com modelagens oversized ou boxy em boa parte das peças — se sua medida ficar entre dois números da tabela, o tamanho menor tende a resultar em um caimento mais próximo do corpo, e o maior, em um caimento solto, característico da estética de cada grife. Na dúvida, fale com a gente pelo <a href="contato.html" style="color:var(--white);text-decoration:underline;">canal de contato</a> antes de fechar o pedido.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>&copy; 2026 Glitch Stylish. Todos os direitos reservados.</span>
+  <a href="index.html">Voltar para a loja</a>
+</footer>
+
+<script>
+  (function(){
+    var tabs = document.querySelectorAll('.size-tab');
+    var panels = document.querySelectorAll('.size-panel');
+
+    tabs.forEach(function(tab){
+      tab.addEventListener('click', function(){
+        tabs.forEach(function(t){ t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+        panels.forEach(function(p){ p.classList.remove('active'); });
+
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected','true');
+        document.getElementById(tab.getAttribute('data-target')).classList.add('active');
+      });
+    });
+  })();
+</script>
+
+
+<script>
+(function(){
+  var noticeClose = document.getElementById('noticeClose');
+  if (noticeClose) {
+    noticeClose.addEventListener('click', function(){
+      document.documentElement.classList.add('notice-dismissed');
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLITCH STYLISH — High Fashion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400&family=Inter:wght@300;400;500;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+  /* ============ ACESSIBILIDADE ============ */
+html.a11y-light{
+  --black:#fafafa;
+  --near-black:#f0f0f0;
+  --white:#0a0a0a;
+  --grey-mid:#6b6b6b;
+  --grey-light:#3a3a3a;
+  --hairline:rgba(10,10,10,0.14);
+}
+
+html.a11y-large{ zoom:1.15; }
+
+html.a11y-reduce-motion *{
+  animation:none !important;
+  transition:none !important;
+  scroll-behavior:auto !important;
+}
+
+html.a11y-underline a{ text-decoration:underline !important; }
+
+.a11y-tab{
+  position:fixed;
+  top:50%;right:0;
+  transform:translateY(-50%);
+  z-index:200;
+  display:flex;align-items:center;gap:8px;
+  background:var(--white);color:var(--black);
+  border:1px solid var(--white);border-right:none;
+  padding:14px 10px;cursor:pointer;
+  writing-mode:vertical-rl;text-orientation:mixed;
+  font-family:'Inter',sans-serif;font-size:11px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  transition:padding .3s;
+}
+.a11y-tab:hover{padding-right:16px;}
+.a11y-tab svg{width:16px;height:16px;transform:rotate(90deg);}
+
+.a11y-panel{
+  position:fixed;top:0;right:0;z-index:201;
+  height:100%;width:300px;max-width:86vw;
+  background:var(--black);
+  border-left:1px solid var(--hairline);
+  padding:32px 28px;
+  transform:translateX(100%);
+  transition:transform .4s cubic-bezier(.65,0,.35,1);
+  display:flex;flex-direction:column;gap:28px;
+  overflow-y:auto;
+}
+.a11y-panel.open{transform:translateX(0);}
+
+.a11y-panel-head{display:flex;align-items:center;justify-content:space-between;}
+.a11y-panel-head h3{font-family:'Bodoni Moda',serif;font-weight:400;font-size:22px;color:var(--white);}
+
+.a11y-close{background:none;border:none;color:var(--white);font-size:20px;line-height:1;cursor:pointer;padding:4px;}
+
+.a11y-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--hairline);}
+.a11y-row span{font-size:13px;color:var(--grey-light);}
+
+.a11y-switch{
+  position:relative;width:42px;height:24px;
+  border:1px solid var(--grey-mid);border-radius:100px;
+  background:transparent;cursor:pointer;flex-shrink:0;
+}
+.a11y-switch::after{
+  content:'';position:absolute;top:2px;left:2px;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--white);
+  transition:transform .3s cubic-bezier(.65,0,.35,1);
+}
+.a11y-switch[aria-pressed="true"]{border-color:var(--white);}
+.a11y-switch[aria-pressed="true"]::after{transform:translateX(18px);}
+
+.a11y-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.4);
+  z-index:199;opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.a11y-overlay.open{opacity:1;pointer-events:auto;}
+
+@media (prefers-reduced-motion: reduce){
+  .a11y-panel, .a11y-switch::after{transition:none;}
+}
+
+  /* ============ AVISO ACADÊMICO ============ */
+  .notice-bar{
+    position:fixed;
+    top:0;left:0;right:0;
+    height:42px;
+    z-index:150;
+    background:var(--white);
+    color:var(--black);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    padding:0 20px;
+    font-family:'Inter',sans-serif;
+    font-size:12px;
+    text-align:center;
+  }
+  .notice-bar a{
+    color:var(--black);
+    text-decoration:underline;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .notice-bar button{
+    background:none;border:none;color:var(--black);
+    font-size:18px;line-height:1;cursor:pointer;
+    padding:0 2px;flex-shrink:0;
+  }
+  html.notice-dismissed .notice-bar{display:none;}
+  html.notice-dismissed header{top:0;}
+  html.notice-dismissed body{padding-top:0;}
+
+  @media (max-width:860px){
+    .notice-bar{height:auto;min-height:42px;padding:8px 16px;font-size:11px;flex-wrap:wrap;}
+  }
+
+  :root{
+    --black:#0a0a0a;
+    --near-black:#141414;
+    --white:#fafafa;
+    --grey-mid:#8c8c8c;
+    --grey-light:#d4d4d4;
+    --hairline:rgba(250,250,250,0.14);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--black);
+    color:var(--white);
+    font-family:'Inter',sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+    padding-top:42px;
+  }
+
+  ::selection{background:var(--white);color:var(--black);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;
+    top:42px;left:0;right:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:28px 48px;
+    mix-blend-mode:difference;
+  }
+
+  .logo{
+    font-family:'Bodoni Moda',serif;
+    font-size:20px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+  }
+
+  nav ul{
+    display:flex;
+    gap:40px;
+    list-style:none;
+  }
+
+  nav a{
+    color:var(--white);
+    text-decoration:none;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    position:relative;
+    padding-bottom:4px;
+  }
+
+  nav a::after{
+    content:'';
+    position:absolute;
+    left:0;bottom:0;
+    width:0;height:1px;
+    background:var(--white);
+    transition:width .4s cubic-bezier(.65,0,.35,1);
+  }
+
+  nav a:hover::after{width:100%;}
+
+  .cart{
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    border:1px solid var(--white);
+    padding:8px 16px;
+    background:transparent;
+    color:var(--white);
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-block;
+    transition:background .3s, color .3s;
+  }
+
+  .cart:hover{background:var(--white);color:var(--black);}
+
+  /* ---------- ROLL NAV (abaixo do título) ---------- */
+  .roll-nav{
+    position:relative;
+    z-index:1;
+    margin-top:32px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+  }
+
+  .roll-nav li{list-style:none;}
+
+  .roll-nav a{
+    position:relative;
+    display:block;
+    overflow:hidden;
+    font-family:'Inter',sans-serif;
+    font-weight:800;
+    text-transform:uppercase;
+    font-size:clamp(26px,4.2vw,48px);
+    letter-spacing:-0.01em;
+    line-height:0.85;
+    color:var(--white);
+    text-decoration:none;
+    padding:2px 6px;
+  }
+
+  .roll-wrap{
+    position:relative;
+    display:inline-block;
+  }
+
+  .roll-wrap .roll-layer{
+    display:block;
+  }
+
+  .roll-wrap .roll-layer.bottom{
+    position:absolute;
+    top:0;left:0;
+  }
+
+  .roll-wrap .roll-layer span{
+    display:inline-block;
+    transition-property:transform;
+    transition-duration:.5s;
+    transition-timing-function:cubic-bezier(.65,0,.35,1);
+  }
+
+  .roll-wrap .roll-layer.top span{transform:translateY(0);}
+  .roll-wrap .roll-layer.bottom span{transform:translateY(100%);}
+
+  .roll-nav a:hover .roll-layer.top span{transform:translateY(-100%);}
+  .roll-nav a:hover .roll-layer.bottom span{transform:translateY(0);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    padding:0 24px;
+  }
+
+  .hero-canvas{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    pointer-events:none;
+    opacity:0.6;
+  }
+
+  .hero-eyebrow{
+    position:relative;
+    z-index:1;
+    font-size:11px;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--grey-mid);
+    margin-bottom:28px;
+  }
+
+  .hero h1{
+    position:relative;
+    z-index:1;
+    font-family:'Bodoni Moda',serif;
+    font-weight:400;
+    font-size:clamp(56px,10vw,140px);
+    line-height:0.92;
+    letter-spacing:-0.01em;
+  }
+
+  .hero h1 em{
+    font-style:italic;
+    font-weight:400;
+  }
+
+  .hero-sub{
+    position:relative;
+    z-index:1;
+    margin-top:32px;
+    max-width:480px;
+    font-size:14px;
+    line-height:1.7;
+    color:var(--grey-light);
+    font-weight:300;
+  }
+
+  .scroll-cue{
+    position:absolute;
+    z-index:1;
+    bottom:40px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    font-size:10px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--grey-mid);
+  }
+
+  .scroll-line{
+    width:1px;
+    height:50px;
+    background:linear-gradient(var(--grey-mid),transparent);
+    animation:scrollPulse 2.2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse{
+    0%{transform:scaleY(0);transform-origin:top;}
+    50%{transform:scaleY(1);transform-origin:top;}
+    50.01%{transform-origin:bottom;}
+    100%{transform:scaleY(0);transform-origin:bottom;}
+  }
+
+  /* ---------- BRAND DOORS ---------- */
+  .doors{
+    display:flex;
+    height:100vh;
+    width:100%;
+    border-top:1px solid var(--hairline);
+  }
+
+  .door{
+    position:relative;
+    flex:1;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    overflow:hidden;
+    cursor:pointer;
+    border-right:1px solid var(--hairline);
+    transition:flex .6s cubic-bezier(.65,0,.35,1);
+    background:var(--near-black);
+  }
+
+  .door:last-child{border-right:none;}
+
+  .door:hover{flex:1.6;}
+
+  .door-bg{
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255,255,255,0.05), transparent 60%),
+      linear-gradient(180deg, var(--near-black) 0%, #000 100%);
+    transition:transform .8s cubic-bezier(.65,0,.35,1);
+  }
+
+  .door:hover .door-bg{transform:scale(1.06);}
+
+  /* ---------- BRAND STICKER (peel effect) ---------- */
+  .sticker{
+    position:absolute;
+    top:28px;
+    right:28px;
+    z-index:4;
+    width:58px;
+    height:58px;
+    perspective:260px;
+  }
+
+  .sticker-face{
+    position:relative;
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--white);
+    clip-path:polygon(0 0,100% 0,100% 100%,16px 100%,0 calc(100% - 16px));
+    box-shadow:0 6px 16px rgba(0,0,0,0.4);
+    transform-origin:bottom left;
+    transform:rotateX(0deg) rotateY(0deg) translateZ(0);
+    transition:transform .55s cubic-bezier(.65,0,.35,1), box-shadow .55s;
+    padding:9px;
+  }
+
+  .sticker-face img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+  }
+
+  .sticker-corner{
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:16px;
+    height:16px;
+    background:linear-gradient(135deg, rgba(255,255,255,0.5), rgba(0,0,0,0.55));
+    clip-path:polygon(0 0,100% 100%,0 100%);
+    transform-origin:top right;
+    transform:rotate(0deg);
+    transition:transform .55s cubic-bezier(.65,0,.35,1);
+    opacity:.85;
+  }
+
+  .door:hover .sticker-face{
+    transform:rotateX(-22deg) rotateY(8deg) translateZ(6px) translateY(-3px);
+    box-shadow:0 24px 28px rgba(0,0,0,0.55);
+  }
+
+  .door:hover .sticker-corner{
+    transform:rotate(-28deg) translate(-4px,4px);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .sticker-face, .sticker-corner{transition:none;}
+  }
+
+  .door-name{
+    position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%) rotate(-90deg);
+    white-space:nowrap;
+    font-family:'Bodoni Moda',serif;
+    font-size:clamp(28px,3.4vw,44px);
+    letter-spacing:0.04em;
+    color:var(--grey-mid);
+    transition:color .5s, transform .6s;
+  }
+
+  .door:hover .door-name{
+    color:var(--white);
+  }
+
+  .door-index{
+    position:absolute;
+    top:32px;left:32px;
+    font-size:11px;
+    letter-spacing:0.1em;
+    color:var(--grey-mid);
+  }
+
+  .door-content{
+    position:relative;
+    z-index:2;
+    width:100%;
+    padding:36px 28px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity .45s ease, transform .45s ease;
+  }
+
+  .door:hover .door-content{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  .door-content .tag{
+    font-size:10px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--grey-mid);
+  }
+
+  .door-content h3{
+    font-family:'Bodoni Moda',serif;
+    font-weight:400;
+    font-size:26px;
+  }
+
+  .door-content p{
+    font-size:12px;
+    color:var(--grey-light);
+    line-height:1.6;
+    max-width:260px;
+  }
+
+  .door-cta{
+    margin-top:6px;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+
+  .door-cta span{
+    display:inline-block;
+    width:22px;height:1px;
+    background:var(--white);
+    transition:width .3s;
+  }
+
+  .door:hover .door-cta span{width:34px;}
+
+  /* ---------- MANIFESTO ---------- */
+  .manifesto{
+    min-height:180vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:120px 24px;
+    border-top:1px solid var(--hairline);
+  }
+
+  .manifesto-inner{
+    max-width:720px;
+    text-align:center;
+  }
+
+  .manifesto-inner .num{
+    font-size:11px;
+    letter-spacing:0.3em;
+    color:var(--grey-mid);
+    display:block;
+    margin-bottom:24px;
+  }
+
+  .manifesto-inner p{
+    font-family:'Bodoni Moda',serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(24px,3.4vw,38px);
+    line-height:1.5;
+    color:rgba(250,250,250,0.15);
+  }
+
+  .manifesto-inner p .word{
+    display:inline-block;
+    color:rgba(250,250,250,0.15);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .manifesto-inner p .word{color:var(--white) !important;}
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--hairline);
+    padding:64px 48px 40px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:48px;
+  }
+
+  .footer-logo{
+    width:150px;
+    margin-bottom:8px;
+  }
+
+  .footer-logo img{
+    width:100%;
+    height:auto;
+    display:block;
+    filter:brightness(0) invert(1);
+  }
+
+  .footer-col h4{
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--grey-mid);
+    margin-bottom:18px;
+    font-weight:400;
+  }
+
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+
+  .footer-col a{
+    color:var(--grey-light);
+    text-decoration:none;
+    font-size:13px;
+    transition:color .3s;
+  }
+
+  .footer-col a:hover{color:var(--white);}
+
+  .footer-bottom{
+    width:100%;
+    margin-top:56px;
+    padding-top:24px;
+    border-top:1px solid var(--hairline);
+    display:flex;
+    justify-content:space-between;
+    font-size:11px;
+    color:var(--grey-mid);
+    letter-spacing:0.05em;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    header{padding:20px 24px;}
+    nav ul{display:none;}
+    .doors{flex-direction:column;height:auto;}
+    .door{
+      height:180px;
+      border-right:none;
+      border-bottom:1px solid var(--hairline);
+      align-items:center;
+    }
+    .door:last-child{border-bottom:none;}
+    .door:hover{flex:1;}
+    .door-name{transform:translate(-50%,-50%) rotate(0deg);}
+    .door-content{
+      opacity:1;
+      transform:none;
+      align-items:center;
+      text-align:center;
+    }
+    .door-content p{display:none;}
+    footer{padding:48px 24px 32px;}
+    .footer-bottom{flex-direction:column;gap:8px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .roll-nav a:hover .roll-layer.top span,
+    .roll-nav a:hover .roll-layer.bottom span{transform:none;}
+  }
+
+  a:focus-visible, button:focus-visible, .door:focus-visible{
+    outline:1px solid var(--white);
+    outline-offset:4px;
+  }
+
+  /* ---------- SCATTER-IN (texto convergindo no scroll) ---------- */
+  .scatter-in{
+    perspective:600px;
+  }
+
+  .scatter-in .sc-char{
+    display:inline-block;
+    transform-origin:center;
+    will-change:transform;
+  }
+
+  .scatter-in .sc-space{
+    width:0.32em;
+  }
+
+  /* ============ TELA DE ABERTURA (INTRO) ============ */
+  .intro-splash{
+    position:fixed;
+    inset:0;
+    z-index:500;
+    background:var(--black);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    opacity:1;
+    visibility:visible;
+    transition:opacity .7s ease, visibility .7s ease;
+    cursor:pointer;
+  }
+
+  .intro-splash.intro-hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+  }
+
+  body.intro-lock{overflow:hidden;height:100vh;}
+
+  /* --- Loader (adaptado de "Loading" de Uiverse.io by andrew-manzyk) --- */
+  .gs-loader{
+    --main-size:4em;
+    --text-color:var(--white);
+    --shine-color:rgba(250,250,250,0.28);
+    --shadow-color:var(--grey-mid);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    user-select:none;
+    position:relative;
+    font-family:'Inter',sans-serif;
+    font-size:var(--main-size);
+    font-weight:900;
+    text-transform:uppercase;
+    color:var(--text-color);
+    width:7.3em;
+    height:1em;
+    filter:drop-shadow(0 0 0.05em var(--shine-color));
+    opacity:0;
+    transition:opacity .5s ease;
+  }
+
+  .intro-splash.intro-ready .gs-loader{opacity:1;}
+
+  .gs-loader .text{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    white-space:nowrap;
+    overflow:hidden;
+    position:absolute;
+  }
+
+  .gs-loader .text:nth-child(1){clip-path:polygon(0% 0%,11.11% 0%,11.11% 100%,0% 100%);font-size:calc(var(--main-size) / 20);margin-left:-2.1em;opacity:.6;}
+  .gs-loader .text:nth-child(2){clip-path:polygon(11.11% 0%,22.22% 0%,22.22% 100%,11.11% 100%);font-size:calc(var(--main-size) / 16);margin-left:-.98em;opacity:.7;}
+  .gs-loader .text:nth-child(3){clip-path:polygon(22.22% 0%,33.33% 0%,33.33% 100%,22.22% 100%);font-size:calc(var(--main-size) / 13);margin-left:-.33em;opacity:.8;}
+  .gs-loader .text:nth-child(4){clip-path:polygon(33.33% 0%,44.44% 0%,44.44% 100%,33.33% 100%);font-size:calc(var(--main-size) / 11);margin-left:-.05em;opacity:.9;}
+  .gs-loader .text:nth-child(5){clip-path:polygon(44.44% 0%,55.55% 0%,55.55% 100%,44.44% 100%);font-size:calc(var(--main-size) / 10);margin-left:0em;opacity:1;}
+  .gs-loader .text:nth-child(6){clip-path:polygon(55.55% 0%,66.66% 0%,66.66% 100%,55.55% 100%);font-size:calc(var(--main-size) / 11);margin-left:.05em;opacity:.9;}
+  .gs-loader .text:nth-child(7){clip-path:polygon(66.66% 0%,77.77% 0%,77.77% 100%,66.66% 100%);font-size:calc(var(--main-size) / 13);margin-left:.33em;opacity:.8;}
+  .gs-loader .text:nth-child(8){clip-path:polygon(77.77% 0%,88.88% 0%,88.88% 100%,77.77% 100%);font-size:calc(var(--main-size) / 16);margin-left:.98em;opacity:.7;}
+  .gs-loader .text:nth-child(9){clip-path:polygon(88.88% 0%,100% 0%,100% 100%,88.88% 100%);font-size:calc(var(--main-size) / 20);margin-left:2.1em;opacity:.6;}
+
+  .gs-loader .text span{
+    animation:gs-scrolling 2s cubic-bezier(.1,.6,.9,.4) infinite,
+              gs-shadow 2s cubic-bezier(.1,.6,.9,.4) infinite;
+  }
+
+  .gs-loader .text:nth-child(1) span{background:linear-gradient(to right, var(--text-color) 4%, var(--shadow-color) 7%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .gs-loader .text:nth-child(2) span{background:linear-gradient(to right, var(--text-color) 9%, var(--shadow-color) 13%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .gs-loader .text:nth-child(3) span{background:linear-gradient(to right, var(--text-color) 15%, var(--shadow-color) 18%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .gs-loader .text:nth-child(4) span{background:linear-gradient(to right, var(--text-color) 20%, var(--shadow-color) 23%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .gs-loader .text:nth-child(6) span{background:linear-gradient(to right, var(--shadow-color) 29%, var(--text-color) 32%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .gs-loader .text:nth-child(7) span{background:linear-gradient(to right, var(--shadow-color) 34%, var(--text-color) 37%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .gs-loader .text:nth-child(8) span{background:linear-gradient(to right, var(--shadow-color) 39%, var(--text-color) 42%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .gs-loader .text:nth-child(9) span{background:linear-gradient(to right, var(--shadow-color) 45%, var(--text-color) 48%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;}
+
+  .gs-loader .line{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    height:.05em;
+    width:calc(var(--main-size) / 2);
+    margin-top:.9em;
+    border-radius:.05em;
+  }
+  .gs-loader .line::before{content:'';position:absolute;height:100%;width:100%;background-color:var(--text-color);opacity:.3;}
+  .gs-loader .line::after{
+    content:'';
+    position:absolute;
+    height:100%;
+    width:100%;
+    background-color:var(--text-color);
+    border-radius:.05em;
+    transform:translateX(-90%);
+    animation:gs-wobble 2s cubic-bezier(.5,.8,.5,.2) infinite;
+  }
+
+  @keyframes gs-wobble{0%{transform:translateX(-90%);}50%{transform:translateX(90%);}100%{transform:translateX(-90%);}}
+  @keyframes gs-scrolling{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
+  @keyframes gs-shadow{0%{background-position:-98% 0;}100%{background-position:102% 0;}}
+
+  .intro-sub{
+    margin-top:22px;
+    font-family:'Bodoni Moda',serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:14px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--grey-light);
+    opacity:0;
+    transition:opacity .8s ease .3s;
+  }
+
+  .intro-splash.intro-ready .intro-sub{opacity:1;}
+
+  .intro-skip{
+    position:absolute;
+    bottom:36px;
+    font-size:10px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--grey-mid);
+    opacity:0;
+    transition:opacity .6s ease .4s;
+  }
+
+  .intro-splash.intro-ready .intro-skip{opacity:1;}
+
+  @media (max-width:600px){
+    .gs-loader{--main-size:2.6em;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .intro-splash, .gs-loader, .gs-loader .text span, .gs-loader .line::after, .intro-sub, .intro-skip{
+      transition:none !important;
+      animation:none !important;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="intro-splash" id="introSplash" aria-hidden="true">
+    <div class="gs-loader">
+      <div class="text"><span>Glitch</span></div>
+      <div class="text"><span>Glitch</span></div>
+      <div class="text"><span>Glitch</span></div>
+      <div class="text"><span>Glitch</span></div>
+      <div class="text"><span>Glitch</span></div>
+      <div class="text"><span>Glitch</span></div>
+      <div class="text"><span>Glitch</span></div>
+      <div class="text"><span>Glitch</span></div>
+      <div class="text"><span>Glitch</span></div>
+      <div class="line"></div>
+    </div>
+    <span class="intro-sub">Stylish</span>
+    <span class="intro-skip">Toque para pular</span>
+  </div>
+
+  <div class="notice-bar" id="noticeBar">
+    <span>Este site é um projeto acadêmico (atividade de faculdade) — não é uma loja real, nenhuma venda é feita aqui. <a href="sobre.html">Saiba mais</a></span>
+    <button id="noticeClose" aria-label="Fechar aviso">&times;</button>
+  </div>
+
+  <div class="a11y-overlay" id="a11yOverlay"></div>
+
+<button class="a11y-tab" id="a11yTab" aria-haspopup="true" aria-expanded="false">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="12" cy="8" r="2" fill="currentColor"/>
+    <path d="M8 16c0-2 1.8-3 4-3s4 1 4 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  Acessibilidade
+</button>
+
+<aside class="a11y-panel" id="a11yPanel" aria-hidden="true">
+  <div class="a11y-panel-head">
+    <h3>Acessibilidade</h3>
+    <button class="a11y-close" id="a11yClose" aria-label="Fechar">&times;</button>
+  </div>
+
+  <div class="a11y-row">
+    <span>Modo claro</span>
+    <button class="a11y-switch" id="a11yLight" aria-pressed="false" aria-label="Alternar modo claro"></button>
+  </div>
+  <div class="a11y-row">
+    <span>Texto maior</span>
+    <button class="a11y-switch" id="a11yLarge" aria-pressed="false" aria-label="Aumentar texto"></button>
+  </div>
+  <div class="a11y-row">
+    <span>Reduzir movimento</span>
+    <button class="a11y-switch" id="a11yMotion" aria-pressed="false" aria-label="Reduzir animações"></button>
+  </div>
+  <div class="a11y-row">
+    <span>Sublinhar links</span>
+    <button class="a11y-switch" id="a11yUnderline" aria-pressed="false" aria-label="Sublinhar links"></button>
+  </div>
+</aside>
+
+<header>
+  <div class="logo">Glitch Stylish</div>
+  <nav>
+    <ul>
+      <li><a href="#rick-owens">Rick Owens</a></li>
+      <li><a href="#chrome-hearts">Chrome Hearts</a></li>
+      <li><a href="#mihara">Mihara Yasuhiro</a></li>
+    </ul>
+  </nav>
+  <a class="cart" href="sacola.html">Sacola (<span class="cart-count">0</span>)</a>
+</header>
+
+<section class="hero">
+  <canvas class="hero-canvas" id="chromaticWaves"></canvas>
+  <span class="hero-eyebrow">High Fashion — Edição Permanente</span>
+  <h1>SILÊNCIO<br><em>é</em> LUXO</h1>
+
+  <ul class="roll-nav" id="rollNav">
+    <li><a href="#" data-roll="Início"></a></li>
+    <li><a href="#rick-owens" data-roll="Marcas"></a></li>
+    <li><a href="rick-owens.html" data-roll="Coleções"></a></li>
+    <li><a href="contato.html" data-roll="Contato"></a></li>
+  </ul>
+
+  <div class="scroll-cue">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<section class="doors">
+  <a class="door" id="rick-owens" href="rick-owens.html" aria-label="Explorar Rick Owens">
+    <div class="door-bg"></div>
+    <div class="sticker" aria-hidden="true">
+      <span class="sticker-corner"></span>
+      <span class="sticker-face"><img src="assets/logos/rick-owens.png" alt="Logo Rick Owens"></span>
+    </div>
+    <span class="door-index">01</span>
+    <span class="door-name">Rick Owens</span>
+    <div class="door-content">
+      <span class="tag">Portland / Paris</span>
+      <h3 class="scatter-in">Rick Owens</h3>
+      <p>Arquitetura sobre o corpo. Silhuetas brutalistas, camadas escultóricas e a estética do inacabado.</p>
+      <div class="door-cta"><span></span>Ver coleção</div>
+    </div>
+  </a>
+
+  <a class="door" id="chrome-hearts" href="chrome-hearts.html" aria-label="Explorar Chrome Hearts">
+    <div class="door-bg"></div>
+    <div class="sticker" aria-hidden="true">
+      <span class="sticker-corner"></span>
+      <span class="sticker-face"><img src="assets/logos/chrome-hearts.png" alt="Logo Chrome Hearts"></span>
+    </div>
+    <span class="door-index">02</span>
+    <span class="door-name">Chrome Hearts</span>
+    <div class="door-content">
+      <span class="tag">Los Angeles</span>
+      <h3 class="scatter-in">Chrome Hearts</h3>
+      <p>Prata trabalhada à mão, gótico americano e peças que carregam a marca do artesão.</p>
+      <div class="door-cta"><span></span>Ver coleção</div>
+    </div>
+  </a>
+
+  <a class="door" id="mihara" href="mihara-yasuhiro.html" aria-label="Explorar Maison Mihara Yasuhiro">
+    <div class="door-bg"></div>
+    <div class="sticker" aria-hidden="true">
+      <span class="sticker-corner"></span>
+      <span class="sticker-face"><img src="assets/logos/mihara-yasuhiro.png" alt="Logo Maison Mihara Yasuhiro"></span>
+    </div>
+    <span class="door-index">03</span>
+    <span class="door-name">Mihara Yasuhiro</span>
+    <div class="door-content">
+      <span class="tag">Tóquio</span>
+      <h3 class="scatter-in">Maison Mihara Yasuhiro</h3>
+      <p>Streetwear desconstruído com raiz japonesa. Volumes inesperados, acabamento imprevisível.</p>
+      <div class="door-cta"><span></span>Ver coleção</div>
+    </div>
+  </a>
+</section>
+
+<section class="manifesto">
+  <div class="manifesto-inner">
+    <span class="num">Manifesto</span>
+    <p id="scrollHighlight">Não vendemos tendência. Vendemos o que permanece depois que a estação termina — peças com peso próprio, escolhidas uma a uma para quem prefere ser lembrado pelo silêncio, não pelo barulho.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">
+    <img src="assets/logos/glitch-stylish.png" alt="Glitch Stylish">
+  </div>
+
+  <div class="footer-col">
+    <h4>Marcas</h4>
+    <ul>
+      <li><a href="#rick-owens">Rick Owens</a></li>
+      <li><a href="#chrome-hearts">Chrome Hearts</a></li>
+      <li><a href="#mihara">Mihara Yasuhiro</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-col">
+    <h4>Atendimento</h4>
+    <ul>
+      <li><a href="trocas-devolucoes.html">Trocas &amp; Devoluções</a></li>
+      <li><a href="guia-de-tamanhos.html">Guia de Tamanhos</a></li>
+      <li><a href="contato.html">Fale Conosco</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-col">
+    <h4>Institucional</h4>
+    <ul>
+      <li><a href="sobre.html">Sobre a Glitch Stylish</a></li>
+      <li><a href="autenticidade.html">Autenticidade</a></li>
+      <li><a href="privacidade.html">Política de Privacidade</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-bottom">
+    <span>&copy; 2026 Glitch Stylish. Todos os direitos reservados.</span>
+    <span>Preto · Branco · Cinza</span>
+  </div>
+</footer>
+
+<script src="assets/cart.js"></script>
+
+<script>
+  // Tela de abertura (intro splash) com a wordmark do site.
+  // Aparece uma vez por sessão (sessionStorage), soma-se por conta própria
+  // e pode ser pulada com um clique/toque. Sem animação se
+  // prefers-reduced-motion estiver ativo.
+  (function(){
+    var splash = document.getElementById('introSplash');
+    if (!splash) return;
+
+    var alreadySeen = false;
+    try { alreadySeen = sessionStorage.getItem('glitch-intro-seen') === '1'; } catch (e) {}
+
+    if (alreadySeen) {
+      splash.remove();
+      return;
+    }
+
+    document.body.classList.add('intro-lock');
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var timer = null;
+
+    function finishIntro(){
+      if (timer) clearTimeout(timer);
+      splash.classList.add('intro-hide');
+      document.body.classList.remove('intro-lock');
+      try { sessionStorage.setItem('glitch-intro-seen', '1'); } catch (e) {}
+      window.setTimeout(function(){
+        if (splash.parentNode) splash.parentNode.removeChild(splash);
+      }, 750);
+    }
+
+    if (reduceMotion) {
+      finishIntro();
+      return;
+    }
+
+    requestAnimationFrame(function(){
+      splash.classList.add('intro-ready');
+    });
+
+    timer = window.setTimeout(finishIntro, 1900);
+    splash.addEventListener('click', finishIntro);
+  })();
+</script>
+
+<script>
+  // Adaptação em vanilla JS do efeito "TextRoll" (framer-motion -> CSS transitions)
+  (function(){
+    var STAGGER = 0.035; // segundos, igual ao componente original
+
+    document.querySelectorAll('#rollNav a[data-roll]').forEach(function(link){
+      var text = link.getAttribute('data-roll');
+      var letters = text.split('');
+      var mid = (letters.length - 1) / 2;
+
+      var wrap = document.createElement('span');
+      wrap.className = 'roll-wrap';
+
+      var top = document.createElement('span');
+      top.className = 'roll-layer top';
+      var bottom = document.createElement('span');
+      bottom.className = 'roll-layer bottom';
+
+      letters.forEach(function(letter, i){
+        var delay = (STAGGER * Math.abs(i - mid)).toFixed(3) + 's';
+        var ch = (letter === ' ') ? '\u00A0' : letter;
+
+        var sTop = document.createElement('span');
+        sTop.textContent = ch;
+        sTop.style.transitionDelay = delay;
+        top.appendChild(sTop);
+
+        var sBottom = document.createElement('span');
+        sBottom.textContent = ch;
+        sBottom.style.transitionDelay = delay;
+        bottom.appendChild(sBottom);
+      });
+
+      wrap.appendChild(top);
+      wrap.appendChild(bottom);
+      link.appendChild(wrap);
+      link.setAttribute('aria-label', text);
+    });
+  })();
+</script>
+
+<script>
+  // Adaptação em vanilla JS do componente "ScrollHighlight" (GSAP + ScrollTrigger)
+  (function(){
+    var WORD_STAGGER = 0.1; // igual ao componente original
+
+    var paragraph = document.getElementById('scrollHighlight');
+    if (!paragraph || typeof gsap === 'undefined') return;
+
+    var dimColor = 'rgba(250,250,250,0.15)';
+    var highlightColor = '#fafafa';
+
+    var text = paragraph.textContent.trim();
+    var words = text.split(/\s+/).filter(Boolean);
+
+    paragraph.innerHTML = words
+      .map(function(word){ return '<span class="word">' + word + '</span>'; })
+      .join(' ');
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    var targets = paragraph.querySelectorAll('.word');
+
+    gsap.set(targets, { color: dimColor });
+
+    gsap.to(targets, {
+      color: highlightColor,
+      stagger: WORD_STAGGER,
+      scrollTrigger: {
+        trigger: paragraph,
+        start: 'top center',
+        end: 'bottom center',
+        scrub: true
+      }
+    });
+  })();
+</script>
+
+<script>
+  // Adaptação em WebGL2 puro do componente "Chromatic Waves" (sem a lib OGL),
+  // com a paleta trocada de arco-íris para preto/branco/cinza para casar com a marca.
+  (function(){
+    var canvas = document.getElementById('chromaticWaves');
+    if (!canvas) return;
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var gl = canvas.getContext('webgl2', { alpha: true, premultipliedAlpha: false });
+    if (!gl) { canvas.style.display = 'none'; return; }
+
+    var VERT = '#version 300 es\n' +
+      'in vec2 position;\n' +
+      'in vec2 uv;\n' +
+      'out vec2 vUv;\n' +
+      'void main(){ vUv = uv; gl_Position = vec4(position, 0.0, 1.0); }';
+
+    var NOISE_FUNC =
+      'vec3 mod289(vec3 x){ return x - floor(x * (1.0/289.0)) * 289.0; }\n' +
+      'vec4 mod289(vec4 x){ return x - floor(x * (1.0/289.0)) * 289.0; }\n' +
+      'vec4 permute(vec4 x){ return mod289(((x*34.0)+1.0)*x); }\n' +
+      'vec4 taylorInvSqrt(vec4 r){ return 1.79284291400159 - 0.85373472095314*r; }\n' +
+      'float snoise(vec3 v){\n' +
+      '  const vec2 C = vec2(1.0/6.0, 1.0/3.0);\n' +
+      '  const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);\n' +
+      '  vec3 i = floor(v + dot(v, C.yyy));\n' +
+      '  vec3 x0 = v - i + dot(i, C.xxx);\n' +
+      '  vec3 g = step(x0.yzx, x0.xyz);\n' +
+      '  vec3 l = 1.0 - g;\n' +
+      '  vec3 i1 = min(g.xyz, l.zxy);\n' +
+      '  vec3 i2 = max(g.xyz, l.zxy);\n' +
+      '  vec3 x1 = x0 - i1 + C.xxx;\n' +
+      '  vec3 x2 = x0 - i2 + C.yyy;\n' +
+      '  vec3 x3 = x0 - D.yyy;\n' +
+      '  i = mod289(i);\n' +
+      '  vec4 p = permute(permute(permute(\n' +
+      '            i.z + vec4(0.0, i1.z, i2.z, 1.0))\n' +
+      '          + i.y + vec4(0.0, i1.y, i2.y, 1.0))\n' +
+      '          + i.x + vec4(0.0, i1.x, i2.x, 1.0));\n' +
+      '  float n_ = 0.142857142857;\n' +
+      '  vec3 ns = n_ * D.wyz - D.xzx;\n' +
+      '  vec4 j = p - 49.0 * floor(p * ns.z * ns.z);\n' +
+      '  vec4 x_ = floor(j * ns.z);\n' +
+      '  vec4 y_ = floor(j - 7.0 * x_);\n' +
+      '  vec4 x = x_ * ns.x + ns.yyyy;\n' +
+      '  vec4 y = y_ * ns.x + ns.yyyy;\n' +
+      '  vec4 h = 1.0 - abs(x) - abs(y);\n' +
+      '  vec4 b0 = vec4(x.xy, y.xy);\n' +
+      '  vec4 b1 = vec4(x.zw, y.zw);\n' +
+      '  vec4 s0 = floor(b0) * 2.0 + 1.0;\n' +
+      '  vec4 s1 = floor(b1) * 2.0 + 1.0;\n' +
+      '  vec4 sh = -step(h, vec4(0.0));\n' +
+      '  vec4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;\n' +
+      '  vec4 a1 = b1.xzyw + s1.xzyw * sh.zzww;\n' +
+      '  vec3 p0 = vec3(a0.xy, h.x);\n' +
+      '  vec3 p1 = vec3(a0.zw, h.y);\n' +
+      '  vec3 p2 = vec3(a1.xy, h.z);\n' +
+      '  vec3 p3 = vec3(a1.zw, h.w);\n' +
+      '  vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2,p2), dot(p3,p3)));\n' +
+      '  p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;\n' +
+      '  vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);\n' +
+      '  m = m * m;\n' +
+      '  return 42.0 * dot(m*m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));\n' +
+      '}\n';
+
+    // Passo 1: ruído perlin em escala de cinza (sem arco-íris, mantém a marca P&B)
+    var PERLIN_FRAG = '#version 300 es\n' +
+      'precision mediump float;\n' +
+      'uniform float uFrequency;\n' +
+      'uniform float uTime;\n' +
+      'uniform float uSpeed;\n' +
+      'uniform vec2 uResolution;\n' +
+      'in vec2 vUv;\n' +
+      'out vec4 fragColor;\n' +
+      NOISE_FUNC +
+      'void main(){\n' +
+      '  vec2 uv = vUv;\n' +
+      '  float aspect = uResolution.x / max(uResolution.y, 1.0);\n' +
+      '  uv = (uv - 0.5) * vec2(aspect, 1.0) + 0.5;\n' +
+      '  float n = abs(snoise(vec3(uv * uFrequency, uTime * uSpeed)));\n' +
+      '  fragColor = vec4(vec3(n), 1.0);\n' +
+      '}';
+
+    // Passo 2: grade de pontos, cor interpolada entre cinza e branco
+    var DOT_FRAG = '#version 300 es\n' +
+      'precision highp float;\n' +
+      'uniform vec2 uResolution;\n' +
+      'uniform sampler2D uTexture;\n' +
+      'uniform vec3 uColorA;\n' +
+      'uniform float uAlphaA;\n' +
+      'uniform vec3 uColorB;\n' +
+      'uniform float uAlphaB;\n' +
+      'uniform float uCellSize;\n' +
+      'uniform float uGamma;\n' +
+      'uniform float uPaletteBias;\n' +
+      'out vec4 fragColor;\n' +
+      'void main(){\n' +
+      '  vec2 pix = gl_FragCoord.xy;\n' +
+      '  float cell = max(uCellSize, 1.0);\n' +
+      '  vec2 cellIdx = floor(pix / cell);\n' +
+      '  vec2 cellCenter = (cellIdx + 0.5) * cell;\n' +
+      '  vec3 col = texture(uTexture, cellCenter / uResolution.xy).rgb;\n' +
+      '  float gray = 0.3*col.r + 0.59*col.g + 0.11*col.b;\n' +
+      '  gray = pow(clamp(gray, 0.0001, 1.0), uGamma);\n' +
+      '  vec2 cellUV = fract(pix / cell) - 0.5;\n' +
+      '  float dist = length(cellUV);\n' +
+      '  float radius = clamp(gray + uPaletteBias, 0.0, 1.0) * 0.5;\n' +
+      '  float aa = fwidth(dist) + 1e-4;\n' +
+      '  float mark = 1.0 - smoothstep(radius - aa, radius + aa, dist);\n' +
+      '  float g2 = clamp(gray + uPaletteBias, 0.0, 1.0);\n' +
+      '  vec3 dotCol = mix(uColorA, uColorB, g2);\n' +
+      '  float dotOpacity = mix(uAlphaA, uAlphaB, g2);\n' +
+      '  fragColor = vec4(dotCol, mark * dotOpacity);\n' +
+      '}';
+
+    function compile(type, src){
+      var sh = gl.createShader(type);
+      gl.shaderSource(sh, src);
+      gl.compileShader(sh);
+      if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+        console.error(gl.getShaderInfoLog(sh));
+      }
+      return sh;
+    }
+    function createProgram(vsSrc, fsSrc){
+      var vs = compile(gl.VERTEX_SHADER, vsSrc);
+      var fs = compile(gl.FRAGMENT_SHADER, fsSrc);
+      var prog = gl.createProgram();
+      gl.attachShader(prog, vs);
+      gl.attachShader(prog, fs);
+      gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+        console.error(gl.getProgramInfoLog(prog));
+      }
+      return prog;
+    }
+
+    var perlinProgram = createProgram(VERT, PERLIN_FRAG);
+    var dotProgram = createProgram(VERT, DOT_FRAG);
+
+    var positions = new Float32Array([-1,-1, 1,-1, -1,1, 1,1]);
+    var uvs = new Float32Array([0,0, 1,0, 0,1, 1,1]);
+
+    function setupAttribs(program){
+      var vao = gl.createVertexArray();
+      gl.bindVertexArray(vao);
+
+      var posLoc = gl.getAttribLocation(program, 'position');
+      var posBuf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+      gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+      gl.enableVertexAttribArray(posLoc);
+      gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+      var uvLoc = gl.getAttribLocation(program, 'uv');
+      var uvBuf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, uvBuf);
+      gl.bufferData(gl.ARRAY_BUFFER, uvs, gl.STATIC_DRAW);
+      gl.enableVertexAttribArray(uvLoc);
+      gl.vertexAttribPointer(uvLoc, 2, gl.FLOAT, false, 0, 0);
+
+      gl.bindVertexArray(null);
+      return vao;
+    }
+
+    var perlinVao = setupAttribs(perlinProgram);
+    var dotVao = setupAttribs(dotProgram);
+
+    var pUniforms = {
+      uFrequency: gl.getUniformLocation(perlinProgram, 'uFrequency'),
+      uTime: gl.getUniformLocation(perlinProgram, 'uTime'),
+      uSpeed: gl.getUniformLocation(perlinProgram, 'uSpeed'),
+      uResolution: gl.getUniformLocation(perlinProgram, 'uResolution')
+    };
+    var dUniforms = {
+      uResolution: gl.getUniformLocation(dotProgram, 'uResolution'),
+      uTexture: gl.getUniformLocation(dotProgram, 'uTexture'),
+      uColorA: gl.getUniformLocation(dotProgram, 'uColorA'),
+      uAlphaA: gl.getUniformLocation(dotProgram, 'uAlphaA'),
+      uColorB: gl.getUniformLocation(dotProgram, 'uColorB'),
+      uAlphaB: gl.getUniformLocation(dotProgram, 'uAlphaB'),
+      uCellSize: gl.getUniformLocation(dotProgram, 'uCellSize'),
+      uGamma: gl.getUniformLocation(dotProgram, 'uGamma'),
+      uPaletteBias: gl.getUniformLocation(dotProgram, 'uPaletteBias')
+    };
+
+    var rtTex = gl.createTexture();
+    var fbo = gl.createFramebuffer();
+    var texW = 2, texH = 2;
+
+    function setupRenderTarget(w, h){
+      texW = w; texH = h;
+      gl.bindTexture(gl.TEXTURE_2D, rtTex);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+      gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, rtTex, 0);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    }
+
+    function resize(){
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = Math.max(1, Math.round(canvas.clientWidth * dpr));
+      var h = Math.max(1, Math.round(canvas.clientHeight * dpr));
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w;
+        canvas.height = h;
+        setupRenderTarget(w, h);
+      }
+    }
+
+    window.addEventListener('resize', resize);
+    if (window.ResizeObserver) {
+      new ResizeObserver(resize).observe(canvas);
+    }
+    resize();
+
+    // Paleta da marca: cinza-médio -> branco (nada de arco-íris)
+    var colorA = [140/255, 140/255, 140/255];
+    var colorB = [250/255, 250/255, 250/255];
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    var start = null;
+
+    function drawFrame(time){
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+      gl.viewport(0, 0, texW, texH);
+      gl.useProgram(perlinProgram);
+      gl.bindVertexArray(perlinVao);
+      gl.uniform1f(pUniforms.uFrequency, 1.3);
+      gl.uniform1f(pUniforms.uTime, time);
+      gl.uniform1f(pUniforms.uSpeed, 0.18);
+      gl.uniform2f(pUniforms.uResolution, texW, texH);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.useProgram(dotProgram);
+      gl.bindVertexArray(dotVao);
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, rtTex);
+      gl.uniform1i(dUniforms.uTexture, 0);
+      gl.uniform2f(dUniforms.uResolution, canvas.width, canvas.height);
+      gl.uniform3f(dUniforms.uColorA, colorA[0], colorA[1], colorA[2]);
+      gl.uniform1f(dUniforms.uAlphaA, 0.35);
+      gl.uniform3f(dUniforms.uColorB, colorB[0], colorB[1], colorB[2]);
+      gl.uniform1f(dUniforms.uAlphaB, 0.9);
+      gl.uniform1f(dUniforms.uCellSize, 22 * dpr);
+      gl.uniform1f(dUniforms.uGamma, 2.4);
+      gl.uniform1f(dUniforms.uPaletteBias, -0.12);
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    }
+
+    if (reduceMotion) {
+      // Sem animação: renderiza um quadro estático só
+      drawFrame(0);
+    } else {
+      requestAnimationFrame(function loop(t){
+        if (start === null) start = t;
+        drawFrame((t - start) * 0.001);
+        requestAnimationFrame(loop);
+      });
+    }
+  })();
+</script>
+
+<script>
+  // Adaptação em vanilla JS + GSAP ScrollTrigger do componente "Skiper31"
+  // (Framer Motion + useScroll -> GSAP scrub). Magnitude reduzida em relação
+  // ao original para ficar elegante repetido em vários pontos do site.
+  (function(){
+    if (typeof gsap === 'undefined') return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var X_STEP = 18;      // px por caractere de distância do centro (original: 50)
+    var ROTATE_STEP = 18; // graus por caractere de distância do centro (original: 50)
+
+    document.querySelectorAll('.scatter-in').forEach(function(el){
+      var text = el.textContent;
+      var chars = text.split('');
+      var centerIndex = Math.floor(chars.length / 2);
+
+      el.innerHTML = '';
+      chars.forEach(function(ch, i){
+        var span = document.createElement('span');
+        span.className = 'sc-char';
+        if (ch === ' ') {
+          span.className += ' sc-space';
+          span.textContent = '\u00A0';
+        } else {
+          span.textContent = ch;
+        }
+        el.appendChild(span);
+
+        if (!reduceMotion) {
+          var distance = i - centerIndex;
+          gsap.set(span, { x: distance * X_STEP, rotateX: distance * ROTATE_STEP });
+
+          gsap.to(span, {
+            x: 0,
+            rotateX: 0,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 88%',
+              end: 'top 45%',
+              scrub: 0.4
+            }
+          });
+        }
+      });
+    });
+  })();
+</script>
+
+<script>
+(function(){
+  var noticeBar = document.getElementById('noticeBar');
+  var noticeClose = document.getElementById('noticeClose');
+  if (noticeClose) {
+    noticeClose.addEventListener('click', function(){
+      document.documentElement.classList.add('notice-dismissed');
+    });
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var html = document.documentElement;
+  var tab = document.getElementById('a11yTab');
+  var panel = document.getElementById('a11yPanel');
+  var overlay = document.getElementById('a11yOverlay');
+  var closeBtn = document.getElementById('a11yClose');
+
+  function openPanel(){
+    panel.classList.add('open');
+    overlay.classList.add('open');
+    tab.setAttribute('aria-expanded', 'true');
+    panel.setAttribute('aria-hidden', 'false');
+  }
+  function closePanel(){
+    panel.classList.remove('open');
+    overlay.classList.remove('open');
+    tab.setAttribute('aria-expanded', 'false');
+    panel.setAttribute('aria-hidden', 'true');
+  }
+
+  tab.addEventListener('click', openPanel);
+  closeBtn.addEventListener('click', closePanel);
+  overlay.addEventListener('click', closePanel);
+
+  function makeToggle(id, cssClass){
+    var btn = document.getElementById(id);
+    btn.addEventListener('click', function(){
+      var active = html.classList.toggle(cssClass);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+
+  makeToggle('a11yLight', 'a11y-light');
+  makeToggle('a11yLarge', 'a11y-large');
+  makeToggle('a11yMotion', 'a11y-reduce-motion');
+  makeToggle('a11yUnderline', 'a11y-underline');
+})();
+</script>
+
+</body>
+</html>

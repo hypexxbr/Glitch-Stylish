@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre — Glitch Stylish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0a0a0a;
+    --near-black:#141414;
+    --white:#fafafa;
+    --grey-mid:#8c8c8c;
+    --grey-light:#d4d4d4;
+    --hairline:rgba(250,250,250,0.14);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--black);
+    color:var(--white);
+    font-family:'Inter',sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+    padding-top:42px;
+  }
+
+  ::selection{background:var(--white);color:var(--black);}
+
+  /* ============ AVISO ACADÊMICO ============ */
+  .notice-bar{
+    position:fixed;
+    top:0;left:0;right:0;
+    height:42px;
+    z-index:150;
+    background:var(--white);
+    color:var(--black);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    padding:0 20px;
+    font-family:'Inter',sans-serif;
+    font-size:12px;
+    text-align:center;
+  }
+  .notice-bar a{
+    color:var(--black);
+    text-decoration:underline;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .notice-bar button{
+    background:none;border:none;color:var(--black);
+    font-size:18px;line-height:1;cursor:pointer;
+    padding:0 2px;flex-shrink:0;
+  }
+  html.notice-dismissed .notice-bar{display:none;}
+  html.notice-dismissed header{top:0;}
+  html.notice-dismissed body{padding-top:0;}
+  @media (max-width:860px){
+    .notice-bar{height:auto;min-height:42px;padding:8px 16px;font-size:11px;flex-wrap:wrap;}
+  }
+
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;
+    top:42px;left:0;right:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:28px 48px;
+    mix-blend-mode:difference;
+  }
+
+  .logo{
+    font-family:'Bodoni Moda',serif;
+    font-size:20px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--white);
+  }
+
+  nav ul{display:flex;gap:40px;list-style:none;}
+
+  nav a{
+    color:var(--white);
+    text-decoration:none;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    position:relative;
+    padding-bottom:4px;
+  }
+
+  nav a::after{
+    content:'';
+    position:absolute;
+    left:0;bottom:0;
+    width:0;height:1px;
+    background:var(--white);
+    transition:width .4s cubic-bezier(.65,0,.35,1);
+  }
+
+  nav a:hover::after{width:100%;}
+
+  .cart{
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    border:1px solid var(--white);
+    padding:8px 16px;
+    background:transparent;
+    color:var(--white);
+    cursor:pointer;
+    transition:background .3s, color .3s;
+  }
+
+  .cart:hover{background:var(--white);color:var(--black);}
+
+  /* ---------- PAGE HEAD ---------- */
+  .page-head{
+    padding:180px 48px 64px;
+    border-bottom:1px solid var(--hairline);
+  }
+
+  .page-head .eyebrow{
+    display:block;
+    font-size:11px;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--grey-mid);
+    margin-bottom:24px;
+  }
+
+  .page-head h1{
+    font-family:'Bodoni Moda',serif;
+    font-weight:400;
+    font-size:clamp(40px,6vw,72px);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    max-width:760px;
+  }
+
+  .page-head h1 em{font-style:italic;}
+
+  .back-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:36px;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--grey-mid);
+    text-decoration:none;
+  }
+
+  .back-link:hover{color:var(--white);}
+  .back-link span{width:20px;height:1px;background:var(--grey-mid);transition:background .3s;}
+  .back-link:hover span{background:var(--white);}
+
+  /* ---------- DECLARAÇÃO / EXPOSIÇÃO ---------- */
+  .expo-statement{
+    padding:72px 48px 88px;
+    border-bottom:1px solid var(--hairline);
+    text-align:center;
+  }
+
+  .expo-statement .eyebrow{
+    display:block;
+    font-size:11px;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--grey-mid);
+    margin-bottom:28px;
+  }
+
+  .expo-text{
+    font-family:'Inter','InterVariableFramer',sans-serif;
+    font-weight:300;
+    font-size:clamp(26px,4.6vw,58px);
+    line-height:1.2;
+    letter-spacing:-0.01em;
+    max-width:900px;
+    margin:0 auto;
+    cursor:default;
+  }
+
+  .expo-word{display:inline-block;white-space:nowrap;}
+  .expo-letter{display:inline-block;}
+
+  .expo-sub{
+    margin-top:28px;
+    font-size:12px;
+    letter-spacing:0.08em;
+    color:var(--grey-mid);
+    text-transform:uppercase;
+  }
+
+  .sr-only{
+    position:absolute;
+    width:1px;height:1px;
+    padding:0;margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+    border-width:0;
+  }
+
+  /* ---------- PROSE ---------- */
+  .prose-wrap{
+    padding:80px 48px 60px;
+    display:flex;
+    justify-content:center;
+  }
+
+  .prose{
+    max-width:680px;
+    width:100%;
+  }
+
+  .lead{
+    font-family:'Bodoni Moda',serif;
+    font-style:italic;
+    font-size:clamp(20px,2.4vw,26px);
+    line-height:1.6;
+    color:var(--white);
+    margin-bottom:56px;
+  }
+
+  .prose-section{
+    margin-top:56px;
+    padding-top:40px;
+    border-top:1px solid var(--hairline);
+  }
+
+  .prose-section:first-of-type{margin-top:0;padding-top:0;border-top:none;}
+
+  .prose-section .sec-num{
+    display:block;
+    font-size:11px;
+    letter-spacing:0.2em;
+    color:var(--grey-mid);
+    margin-bottom:14px;
+  }
+
+  .prose-section h2{
+    font-family:'Bodoni Moda',serif;
+    font-weight:400;
+    font-size:24px;
+    margin-bottom:16px;
+  }
+
+  .prose-section p{
+    font-size:14px;
+    line-height:1.85;
+    color:var(--grey-light);
+    margin-bottom:14px;
+  }
+
+  .values-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+    margin-top:8px;
+  }
+
+  .value-item h3{
+    font-family:'Bodoni Moda',serif;
+    font-weight:400;
+    font-size:17px;
+    margin-bottom:8px;
+  }
+
+  .value-item p{
+    font-size:13px;
+    line-height:1.7;
+    color:var(--grey-light);
+  }
+
+  .creators-section{
+    padding:100px 24px 120px;
+    border-top:1px solid var(--hairline);
+    text-align:center;
+  }
+
+  .creators-section .eyebrow{
+    display:block;
+    font-size:11px;
+    letter-spacing:0.4em;
+    text-transform:uppercase;
+    color:var(--grey-mid);
+    margin-bottom:8px;
+  }
+
+  .curved-marquee{
+    width:100%;
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  .curved-marquee svg{
+    width:100%;
+    height:auto;
+    display:block;
+    fill:var(--white);
+  }
+
+  .curved-marquee text{
+    font-family:'Bodoni Moda',serif;
+    font-style:italic;
+    font-weight:400;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--hairline);
+    padding:40px 48px;
+    display:flex;
+    justify-content:space-between;
+    font-size:11px;
+    color:var(--grey-mid);
+    letter-spacing:0.05em;
+  }
+
+  footer a{color:var(--grey-mid);text-decoration:none;}
+  footer a:hover{color:var(--white);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    header{padding:20px 24px;}
+    nav ul{display:none;}
+    .page-head{padding:140px 24px 48px;}
+    .expo-statement{padding:56px 24px 64px;}
+    .prose-wrap{padding:56px 24px 40px;}
+    .values-grid{grid-template-columns:1fr;gap:24px;}
+    footer{flex-direction:column;gap:8px;padding:32px 24px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;}
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline:1px solid var(--white);
+    outline-offset:4px;
+  }
+</style>
+</head>
+<body>
+  <div class="notice-bar" id="noticeBar">
+    <span>Este site é um projeto acadêmico (atividade de faculdade) — não é uma loja real, nenhuma venda é feita aqui.</span>
+    <button id="noticeClose" aria-label="Fechar aviso">&times;</button>
+  </div>
+
+
+<header>
+  <a class="logo" href="index.html">Glitch Stylish</a>
+  <nav>
+    <ul>
+      <li><a href="rick-owens.html">Rick Owens</a></li>
+      <li><a href="chrome-hearts.html">Chrome Hearts</a></li>
+      <li><a href="mihara-yasuhiro.html">Mihara Yasuhiro</a></li>
+      <li><a href="contato.html">Contato</a></li>
+    </ul>
+  </nav>
+  <button class="cart">Sacola (0)</button>
+</header>
+
+<section class="page-head">
+  <span class="eyebrow">Institucional</span>
+  <h1>Não vendemos tendência. Vendemos o que <em>permanece</em>.</h1>
+  <a class="back-link" href="index.html"><span></span>Voltar para a loja</a>
+</section>
+
+<section class="expo-statement">
+  <span class="eyebrow">Antes de continuar</span>
+  <div class="expo-text" id="expoText"></div>
+  <p class="expo-sub">Projeto acadêmico — nenhuma peça aqui está à venda, nenhum pagamento é processado.</p>
+</section>
+
+<section class="prose-wrap">
+  <div class="prose">
+    <p class="lead">A Glitch Stylish nasceu como uma curadoria, não como uma loja. Reunimos poucas marcas, escolhidas por porte próprio, para quem prefere ser lembrado pelo silêncio, não pelo barulho.</p>
+
+    <div class="prose-section">
+      <span class="sec-num">01</span>
+      <h2>Como escolhemos as marcas</h2>
+      <p>Cada grife que carregamos passou por um filtro simples: a peça precisa dizer algo mesmo fora do contexto da estação em que foi lançada. Não seguimos calendário de tendência — seguimos consistência de linguagem, de material e de construção ao longo do tempo.</p>
+      <p>Hoje, isso significa três nomes: Rick Owens, pela arquitetura escultórica sobre o corpo; Chrome Hearts, pelo artesanato em prata e a estética gótica americana; e Maison Mihara Yasuhiro, pelo streetwear desconstruído de raiz japonesa. Três vocabulários diferentes, um mesmo compromisso com peças que resistem ao tempo.</p>
+    </div>
+
+    <div class="prose-section">
+      <span class="sec-num">02</span>
+      <h2>Como trabalhamos</h2>
+      <p>Cada peça passa por inspeção individual antes de chegar até você. Não trabalhamos com estoque especulativo nem com reposição em massa — o catálogo é deliberadamente pequeno, porque curadoria e escala não convivem bem.</p>
+    </div>
+
+    <div class="prose-section">
+      <span class="sec-num">03</span>
+      <h2>O que guia as decisões</h2>
+      <div class="values-grid">
+        <div class="value-item">
+          <h3>Permanência</h3>
+          <p>Preferimos peças que ainda fazem sentido depois que a estação termina.</p>
+        </div>
+        <div class="value-item">
+          <h3>Transparência</h3>
+          <p>Origem, autenticidade e condição de cada peça são informadas sem letras miúdas.</p>
+        </div>
+        <div class="value-item">
+          <h3>Curadoria enxuta</h3>
+          <p>Três marcas, escolhidas a dedo — não um catálogo interminável.</p>
+        </div>
+        <div class="value-item">
+          <h3>Relação direta</h3>
+          <p>Dúvidas, trocas e pós-venda são respondidos por gente, não por script.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="creators-section">
+  <span class="eyebrow">Creators</span>
+
+  <div class="curved-marquee" id="creatorsMarquee">
+    <svg viewBox="0 0 1440 300" preserveAspectRatio="xMidYMid meet" aria-label="Créditos: Celso Fontes, Enzo Renon, Thales, Daniel Amorim, Arthur Peres, Murilo Candido">
+      <defs>
+        <path id="creatorsCurve" d="M-100,150 Q720,90 1540,150" fill="none" stroke="transparent"></path>
+
+        <linearGradient id="creatorsFade" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="white" stop-opacity="0"></stop>
+          <stop offset="12%" stop-color="white" stop-opacity="1"></stop>
+          <stop offset="88%" stop-color="white" stop-opacity="1"></stop>
+          <stop offset="100%" stop-color="white" stop-opacity="0"></stop>
+        </linearGradient>
+        <mask id="creatorsMask">
+          <rect width="100%" height="100%" fill="url(#creatorsFade)"></rect>
+        </mask>
+      </defs>
+
+      <text id="creatorsMeasure" xml:space="preserve" font-size="34" style="visibility:hidden;opacity:0;"></text>
+
+      <text id="creatorsText" font-size="34" mask="url(#creatorsMask)" xml:space="preserve">
+        <textPath id="creatorsTextPath" href="#creatorsCurve" xml:space="preserve"></textPath>
+      </text>
+    </svg>
+  </div>
+</section>
+
+<footer>
+  <span>&copy; 2026 Glitch Stylish. Todos os direitos reservados.</span>
+  <a href="index.html">Voltar para a loja</a>
+</footer>
+
+<script>
+  // Adaptação em vanilla JS do componente "Dynamic Weight / VariableFontCursorProximity"
+  // (Originkit, React + Framer Motion) -> DOM direto + requestAnimationFrame,
+  // usando a fonte variável Inter já carregada via Google Fonts (eixo 'wght').
+  (function(){
+    var container = document.getElementById('expoText');
+    if (!container) return;
+
+    var label = 'ESTA LOJA É APENAS UMA EXPOSIÇÃO';
+    var fromWeight = 300;   // peso de descanso
+    var toWeight = 800;     // peso máximo, perto do cursor
+    var maxReach = 220;     // alcance da proximidade, em px
+    var tau = 0.25;         // constante de suavização (segundos)
+
+    // Texto acessível para leitor de tela; as letras visuais ficam aria-hidden.
+    var srOnly = document.createElement('span');
+    srOnly.className = 'sr-only';
+    srOnly.textContent = label;
+    container.appendChild(srOnly);
+
+    var visible = document.createElement('span');
+    visible.setAttribute('aria-hidden', 'true');
+    container.appendChild(visible);
+
+    var words = label.split(' ');
+    var letterEls = [];
+
+    words.forEach(function(word, wi){
+      var wordSpan = document.createElement('span');
+      wordSpan.className = 'expo-word';
+      word.split('').forEach(function(letter){
+        var letterSpan = document.createElement('span');
+        letterSpan.className = 'expo-letter';
+        letterSpan.style.fontVariationSettings = "'wght' " + fromWeight;
+        letterSpan.textContent = letter;
+        wordSpan.appendChild(letterSpan);
+        letterEls.push(letterSpan);
+      });
+      visible.appendChild(wordSpan);
+      if (wi < words.length - 1) {
+        var space = document.createElement('span');
+        space.style.display = 'inline-block';
+        space.innerHTML = '&nbsp;';
+        visible.appendChild(space);
+      }
+    });
+
+    var mouse = { x: -99999, y: -99999 };
+    var factors = new Array(letterEls.length).fill(0);
+    var lastFrame = 0;
+
+    function updatePos(clientX, clientY){
+      var rect = container.getBoundingClientRect();
+      mouse.x = clientX - rect.left;
+      mouse.y = clientY - rect.top;
+    }
+
+    window.addEventListener('mousemove', function(e){ updatePos(e.clientX, e.clientY); });
+    window.addEventListener('touchmove', function(e){
+      if (e.touches.length === 0) return;
+      updatePos(e.touches[0].clientX, e.touches[0].clientY);
+    });
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function tick(now){
+      if (!reduceMotion) {
+        var containerRect = container.getBoundingClientRect();
+        var dtSec = lastFrame ? Math.min(0.1, Math.max(0, (now - lastFrame) / 1000)) : 0.016;
+        lastFrame = now;
+        var a = 1 - Math.exp(-dtSec / tau);
+
+        letterEls.forEach(function(el, i){
+          var r = el.getBoundingClientRect();
+          var cx = r.left + r.width / 2 - containerRect.left;
+          var cy = r.top + r.height / 2 - containerRect.top;
+          var dx = mouse.x - cx;
+          var dy = mouse.y - cy;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+
+          var target = Math.min(Math.max(1 - dist / maxReach, 0), 1);
+          var prev = factors[i] || 0;
+          var f = prev + (target - prev) * a;
+          factors[i] = f;
+
+          var w = Math.round(fromWeight + (toWeight - fromWeight) * f);
+          el.style.fontVariationSettings = "'wght' " + w;
+        });
+      }
+      requestAnimationFrame(tick);
+    }
+
+    if (!reduceMotion) {
+      requestAnimationFrame(tick);
+    }
+  })();
+</script>
+
+
+<script>
+  // Adaptação em vanilla JS + SVG do componente "Curved Marquee" (Originkit)
+  // React/refs -> DOM direto; requestAnimationFrame no lugar do loop original.
+  (function(){
+    var wrap = document.getElementById('creatorsMarquee');
+    if (!wrap) return;
+
+    var measureEl = document.getElementById('creatorsMeasure');
+    var pathEl = document.getElementById('creatorsCurve');
+    var textEl = document.getElementById('creatorsText');
+    var textPathEl = document.getElementById('creatorsTextPath');
+
+    var names = ['Celso Fontes', 'Enzo Renon', 'Thales', 'Daniel Amorim', 'Arthur Peres', 'Murilo Candido'];
+    var separator = '   \u2726   '; // ✦
+    var unit = names.join(separator) + separator;
+
+    measureEl.textContent = unit;
+
+    var textWidth = 0;
+    var pathLength = 0;
+    try {
+      textWidth = measureEl.getComputedTextLength();
+      pathLength = pathEl.getTotalLength();
+    } catch (e) { /* SVG not ready */ }
+
+    if (!textWidth || !pathLength) return;
+
+    var spacing = textWidth;
+    var repeats = Math.ceil(pathLength / spacing) + 2;
+    var tspans = [];
+
+    for (var i = 0; i < repeats; i++) {
+      var tspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
+      tspan.setAttribute('x', i * spacing);
+      tspan.textContent = unit;
+      textPathEl.appendChild(tspan);
+      tspans.push(tspan);
+    }
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var baseVelocity = 42; // px/s
+    var isDragging = false;
+    var dragVelocity = 0;
+    var lastPointerX = 0;
+
+    textEl.style.cursor = 'grab';
+
+    textEl.addEventListener('pointerdown', function(e){
+      isDragging = true;
+      try { textEl.setPointerCapture(e.pointerId); } catch(err) {}
+      textEl.style.cursor = 'grabbing';
+      lastPointerX = e.clientX;
+      dragVelocity = 0;
+    });
+
+    textEl.addEventListener('pointermove', function(e){
+      if (!isDragging) return;
+      var dx = e.clientX - lastPointerX;
+      dragVelocity = dx * 1.4;
+      lastPointerX = e.clientX;
+    });
+
+    function endDrag(e){
+      if (!isDragging) return;
+      isDragging = false;
+      textEl.style.cursor = 'grab';
+      try { textEl.releasePointerCapture(e.pointerId); } catch(err) {}
+    }
+    textEl.addEventListener('pointerup', endDrag);
+    textEl.addEventListener('pointercancel', endDrag);
+    textEl.addEventListener('pointerleave', function(){ if (!isDragging) dragVelocity *= 0.9; });
+
+    var last = performance.now();
+
+    function tick(now){
+      var delta = now - last;
+      last = now;
+      var maxX = (tspans.length - 1) * spacing;
+
+      if (!reduceMotion) {
+        var moveBy;
+        if (isDragging) {
+          moveBy = dragVelocity;
+        } else {
+          moveBy = baseVelocity * (delta / 1000);
+          if (Math.abs(dragVelocity) > 0.01) {
+            moveBy += dragVelocity;
+            dragVelocity *= 0.94;
+          } else {
+            dragVelocity = 0;
+          }
+        }
+        tspans.forEach(function(tspan){
+          var x = parseFloat(tspan.getAttribute('x')) || 0;
+          x += moveBy;
+          if (x < -spacing) x = maxX;
+          if (x > maxX) x = -spacing;
+          tspan.setAttribute('x', x);
+        });
+      }
+      requestAnimationFrame(tick);
+    }
+
+    if (reduceMotion) {
+      // Posição estática, sem animação contínua
+    } else {
+      requestAnimationFrame(tick);
+    }
+  })();
+</script>
+
+
+<script>
+(function(){
+  var noticeClose = document.getElementById('noticeClose');
+  if (noticeClose) {
+    noticeClose.addEventListener('click', function(){
+      document.documentElement.classList.add('notice-dismissed');
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
