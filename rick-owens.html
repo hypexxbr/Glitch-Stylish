@@ -266,6 +266,94 @@
   .hg-add-btn:hover{background:var(--white);color:var(--black);border-color:var(--white);}
   .hg-add-btn.added{background:var(--white);color:var(--black);border-color:var(--white);}
 
+  .header-actions{
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+
+  .menu-toggle{
+    display:none;
+    position:relative;
+    width:26px;
+    height:18px;
+    background:none;
+    border:none;
+    padding:0;
+    cursor:pointer;
+    flex-shrink:0;
+  }
+
+  .menu-toggle span{
+    position:absolute;
+    left:0;right:0;
+    height:1px;
+    background:var(--white);
+    transition:transform .3s cubic-bezier(.65,0,.35,1), opacity .3s;
+  }
+
+  .menu-toggle span:nth-child(1){top:0;}
+  .menu-toggle span:nth-child(2){top:8px;}
+  .menu-toggle span:nth-child(3){top:16px;}
+
+  .menu-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+  .menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+
+  .mobile-nav{
+    position:fixed;
+    inset:0;
+    z-index:140;
+    background:var(--black);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:28px;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-8px);
+    transition:opacity .35s ease, transform .35s ease, visibility .35s;
+  }
+
+  .mobile-nav.open{opacity:1;visibility:visible;transform:translateY(0);}
+
+  .mobile-nav-close{
+    position:absolute;
+    top:24px;right:24px;
+    background:none;
+    border:none;
+    color:var(--white);
+    font-size:28px;
+    line-height:1;
+    cursor:pointer;
+    padding:6px;
+  }
+
+  .mobile-nav a{
+    font-family:'Bodoni Moda',serif;
+    font-size:26px;
+    color:var(--white);
+    text-decoration:none;
+    letter-spacing:0.01em;
+  }
+
+  .mobile-nav a.active{color:var(--grey-mid);}
+
+  .mobile-nav a.mobile-nav-cart{
+    margin-top:14px;
+    font-family:'Inter',sans-serif;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    border:1px solid var(--white);
+    padding:12px 26px;
+  }
+
+  @media (max-width:860px){
+    .menu-toggle{display:block;}
+  }
+
   /* ---------- FOOTER ---------- */
   footer{
     border-top:1px solid var(--hairline);
@@ -328,8 +416,22 @@
       <li><a href="contato.html">Contato</a></li>
     </ul>
   </nav>
-  <a class="cart" href="sacola.html">Sacola (<span class="cart-count">0</span>)</a>
+  <div class="header-actions">
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="cart" href="sacola.html">Sacola (<span class="cart-count">0</span>)</a>
+  </div>
 </header>
+
+<nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <button class="mobile-nav-close" id="mobileNavClose" aria-label="Fechar menu">&times;</button>
+  <a href="rick-owens.html" class="active">Rick Owens</a>
+  <a href="chrome-hearts.html">Chrome Hearts</a>
+  <a href="mihara-yasuhiro.html">Mihara Yasuhiro</a>
+  <a href="contato.html">Contato</a>
+  <a class="mobile-nav-cart" href="sacola.html">Sacola (<span class="cart-count">0</span>)</a>
+</nav>
 
 <section class="page-head">
   <span class="eyebrow">01 — Portland / Paris</span>
@@ -417,6 +519,42 @@
       document.documentElement.classList.add('notice-dismissed');
     });
   }
+})();
+</script>
+
+
+<script>
+(function(){
+  var toggle = document.getElementById('menuToggle');
+  var menu = document.getElementById('mobileNav');
+  var closeBtn = document.getElementById('mobileNavClose');
+  if (!toggle || !menu) return;
+
+  function openMenu(){
+    menu.classList.add('open');
+    menu.setAttribute('aria-hidden', 'false');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu(){
+    menu.classList.remove('open');
+    menu.setAttribute('aria-hidden', 'true');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', function(){
+    if (menu.classList.contains('open')) { closeMenu(); } else { openMenu(); }
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeMenu);
+  });
+
+  window.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeMenu();
+  });
 })();
 </script>
 
